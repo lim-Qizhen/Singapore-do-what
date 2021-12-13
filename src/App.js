@@ -18,28 +18,14 @@ function App() {
     "https://images-sg.girlstyle.com/wp-content/uploads/2018/08/Millennial-Pink-2.jpg?quality=90",
   ];
 
-  // const [width, setWidth] = useState(window.innerWidth);
-  // const [height, setHeight] = useState(window.innerHeight);
-  // const handleResize = () => {
-  //   setWidth(window.innerWidth);
-  //   setHeight(window.innerHeight);
-  // };
-
-  // useEffect(() => {
-  //   window.addEventListener("resize", handleResize);
-  //   return () => window.removeEventListener("resize", handleResize);
-  // }, []);
-
   const webpageStyles = {
     backgroundImage: `url(${
       backgroundImages[Math.floor(Math.random() * backgroundImages.length)]
     })`,
     backgroundRepeat: "no-repeat",
-    // width: `${width}px`,
-    // height: `${height}px`,
     backgroundAttachment: "fixed",
     backgroundPosition: "center",
-    minHeight: "100%",
+    height: "100vh",
     backgroundSize: "cover",
   };
 
@@ -73,30 +59,28 @@ function App() {
   const [hasSearched, setHasSearched] = useState(false);
 
   return (
-    <body style={webpageStyles}>
-      <div>
-        <BrowserRouter>
-          <NavBar />
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route exact path="/search">
-            {hasSearched ? (
-              <SearchResults
-                onSubmit={retrieveData}
-                results={results}
-                user={userInput}
-              />
-            ) : (
-              <Search onSubmit={retrieveData} />
-            )}
-          </Route>
-          <Route path="/search/:name">
-            <Details results={results} user={userInput} />
-          </Route>
-        </BrowserRouter>
-      </div>
-    </body>
+    <div style={webpageStyles}>
+      <BrowserRouter>
+        <NavBar />
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route exact path="/search">
+          {hasSearched ? (
+            <SearchResults
+              onSubmit={retrieveData}
+              results={results}
+              user={userInput}
+            />
+          ) : (
+            <Search onSubmit={retrieveData} />
+          )}
+        </Route>
+        <Route path="/search/:name">
+          <Details results={results} user={userInput} />
+        </Route>
+      </BrowserRouter>
+    </div>
   );
 }
 

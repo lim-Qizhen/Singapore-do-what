@@ -1,15 +1,14 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router";
 import styles from "./Results.module.css";
 import ReactStars from "react-rating-stars-component";
+import { Markup } from "interweave";
 
 const Details = (props) => {
   const params = useParams();
   const names = props.results.map((result) => result.name);
   const resultToDisplay = props.results[names.indexOf(params.name)];
-  const [website, setWebsite] = useState(resultToDisplay.officialWebsite)
-  // const website = resultToDisplay.officialWebsite;
-  console.log(resultToDisplay.officialWebsite);
+  console.log(resultToDisplay.officialEmail);
   const allReviews = resultToDisplay.reviews;
   const reviewsDisplay = allReviews.map((review) => {
     return (
@@ -50,23 +49,38 @@ const Details = (props) => {
         />
       </div>
       <br />
-      <p className = {styles.general}>
+      <p className={styles.general}>
         Address:{" "}
         {resultToDisplay.address.streetName !== ""
           ? `${resultToDisplay.address.block} ${resultToDisplay.address.streetName}`
           : "-"}
       </p>
-      <p className = {styles.general}>Nearest MRT station: {resultToDisplay.nearestMrtStation}</p>
-      <p className = {styles.general}>
-        Official Website:<a href={website} target="_blank" rel="noopener noreferrer">
-        {resultToDisplay.officialWebsite !== ""
-          ? `${resultToDisplay.officialWebsite}`
-          : "-"}</a>
+      <p className={styles.general}>
+        Nearest MRT station: {resultToDisplay.nearestMrtStation}
       </p>
-      <p className = {styles.general}>Pricing: {resultToDisplay.pricing.others}</p>
-      <p>The Description 
-        lalalalalala
+      <p className={styles.general}>
+        Official Website: <> </>
+        <a
+          href={"https://" + resultToDisplay.officialWebsite}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {resultToDisplay.officialWebsite !== ""
+            ? `${resultToDisplay.officialWebsite}`
+            : "-"}
+        </a>
       </p>
+      <p className={styles.general}>
+        Pricing: {resultToDisplay.pricing.others}
+      </p>
+      <p className={styles.general}>
+        Call them at{" "}
+        <a href={"tel:" + resultToDisplay.contact.primaryContactNo}>
+          {resultToDisplay.contact.primaryContactNo}{" "}
+        </a> or drop <a href = {"mailto:"+resultToDisplay.officialEmail}>{resultToDisplay.officialEmail}</a> an email for enquiries!
+      </p>
+      {resultToDisplay.description}
+      <Markup content={resultToDisplay.body} />
       <br />
       <h4>
         Reviews{" "}

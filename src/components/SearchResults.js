@@ -12,9 +12,6 @@ const SearchResults = (props) => {
     setNameSort("asc");
     props.onSubmit(query);
     setQuery("");
-    document
-      .getElementById("dropdown")
-      .getElementsByTagName("option")[0].selected = true;
   };
 
   const [nameSort, setNameSort] = useState("asc");
@@ -48,7 +45,7 @@ const SearchResults = (props) => {
           onChange={handleSelect}
           style={{ float: "right" }}
           name="nameSort"
-          defaultValue="asc"
+          value={nameSort}
         >
           <option value="asc">Ascending</option>
           <option value="desc">Descending</option>
