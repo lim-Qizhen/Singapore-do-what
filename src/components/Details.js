@@ -32,6 +32,45 @@ const Details = (props) => {
       </div>
     );
   });
+  const phone = resultToDisplay.contact.primaryContactNo;
+  const email = resultToDisplay.officialEmail;
+  const contactDisplay = (phone, email) => {
+    if (phone.length !== 0 && email.length !== 0) {
+      return (
+        <p className={styles.general}>
+          Call them at <></>
+          <a href={"tel:" + phone}>
+            {phone}{" "}
+          </a>
+          or drop <></>
+          <a href={"mailto:" + email}>
+            {email}
+          </a>{" "}
+          an email for enquiries!
+        </p>
+      );
+    } else if (phone.length === 0 && email.length !== 0){
+      return (
+        <p className={styles.general}>
+          Drop <></>
+          <a href={"mailto:" + email}>
+            {email}
+          </a>{" "}
+          an email for enquiries!
+        </p>
+      )
+    } else if (phone.length !== 0 && email.length === 0){
+      return (
+        <p className={styles.general}>
+          Call them at <></>
+          <a href={"tel:" + phone}>
+            {phone}{" "}
+          </a>
+          for enquiries!
+        </p>
+      )
+    } 
+  };
 
   return (
     <div className={styles.results} style={{ position: "relative" }}>
@@ -60,25 +99,27 @@ const Details = (props) => {
       </p>
       <p className={styles.general}>
         Official Website: <> </>
-        <a
-          href={"https://" + resultToDisplay.officialWebsite}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {resultToDisplay.officialWebsite !== ""
-            ? `${resultToDisplay.officialWebsite}`
-            : "-"}
-        </a>
+        {resultToDisplay.officialWebsite.length !== 0 ? (
+          <a
+            href={"https://" + resultToDisplay.officialWebsite}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {resultToDisplay.officialWebsite !== ""
+              ? `${resultToDisplay.officialWebsite}`
+              : "-"}
+          </a>
+        ) : (
+          "-"
+        )}
       </p>
       <p className={styles.general}>
-        Pricing: {resultToDisplay.pricing.others}
+        Pricing:{" "}
+        {resultToDisplay.pricing.others.length !== 0
+          ? resultToDisplay.pricing.others
+          : "-"}
       </p>
-      <p className={styles.general}>
-        Call them at{" "}
-        <a href={"tel:" + resultToDisplay.contact.primaryContactNo}>
-          {resultToDisplay.contact.primaryContactNo}{" "}
-        </a> or drop <a href = {"mailto:"+resultToDisplay.officialEmail}>{resultToDisplay.officialEmail}</a> an email for enquiries!
-      </p>
+      {contactDisplay(phone, email)}
       {resultToDisplay.description}
       <Markup content={resultToDisplay.body} />
       <br />

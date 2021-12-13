@@ -8,10 +8,10 @@ const NavBar = () => {
             <nav>
                 <ul>
                     <li>
-                        <Link to="/search">Search</Link>
+                        <Link to="/">Home</Link>
                     </li>
                     <li>
-                        Paradox of Choice.
+                        <Link to="/search">Search</Link>
                     </li>
                     <li>
                         You finally decided.

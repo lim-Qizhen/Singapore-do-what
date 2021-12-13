@@ -15,7 +15,6 @@ function App() {
     "https://www.juxtapoz.com/media/k2/galleries/62447/tumblr_n3ktafKXR71rrft0ho1_1280.jpg",
     "https://www.juxtapoz.com/media/k2/galleries/62447/tumblr_nhaqf9BWLK1rrft0ho1_1280.jpg",
     "https://allabout.city/singapore/wp-content/uploads/2021/02/Picnic-Spots-in-Singapore-Singapore-Tuas-Lalang-Field-1.jpg",
-    "https://images-sg.girlstyle.com/wp-content/uploads/2018/08/Millennial-Pink-2.jpg?quality=90",
   ];
 
   const webpageStyles = {
@@ -25,7 +24,7 @@ function App() {
     backgroundRepeat: "no-repeat",
     backgroundAttachment: "fixed",
     backgroundPosition: "center",
-    height: "100vh",
+    minHeight: "100vh",
     backgroundSize: "cover",
   };
 
@@ -59,28 +58,31 @@ function App() {
   const [hasSearched, setHasSearched] = useState(false);
 
   return (
-    <div style={webpageStyles}>
-      <BrowserRouter>
-        <NavBar />
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route exact path="/search">
-          {hasSearched ? (
-            <SearchResults
-              onSubmit={retrieveData}
-              results={results}
-              user={userInput}
-            />
-          ) : (
-            <Search onSubmit={retrieveData} />
-          )}
-        </Route>
-        <Route path="/search/:name">
-          <Details results={results} user={userInput} />
-        </Route>
-      </BrowserRouter>
-    </div>
+    <body style={webpageStyles}>
+      <div >
+        <BrowserRouter>
+          <NavBar />
+          <Route exact path="/">
+            <Home onClick={setHasSearched}/>
+          </Route>
+          <Route exact path="/search">
+            {hasSearched ? (
+              <SearchResults
+                onSubmit={retrieveData}
+                results={results}
+                user={userInput}
+              />
+            ) : (
+              <Search onSubmit={retrieveData} />
+            )}
+          </Route>
+          <Route path="/search/:name">
+            <Details results={results} user={userInput} />
+          </Route>
+        </BrowserRouter>
+      </div>
+      <br/>
+    </body>
   );
 }
 
