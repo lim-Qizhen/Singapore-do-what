@@ -39,38 +39,32 @@ const Details = (props) => {
       return (
         <p className={styles.general}>
           Call them at <></>
-          <a href={"tel:" + phone}>
-            {phone}{" "}
-          </a>
+          <a href={"tel:" + phone}>{phone} </a>
           or drop <></>
-          <a href={"mailto:" + email}>
-            {email}
-          </a>{" "}
-          an email for enquiries!
+          <a href={"mailto:" + email}>{email}</a> an email for enquiries!
         </p>
       );
-    } else if (phone.length === 0 && email.length !== 0){
+    } else if (phone.length === 0 && email.length !== 0) {
       return (
         <p className={styles.general}>
           Drop <></>
-          <a href={"mailto:" + email}>
-            {email}
-          </a>{" "}
-          an email for enquiries!
+          <a href={"mailto:" + email}>{email}</a> an email for enquiries!
         </p>
-      )
-    } else if (phone.length !== 0 && email.length === 0){
+      );
+    } else if (phone.length !== 0 && email.length === 0) {
       return (
         <p className={styles.general}>
           Call them at <></>
-          <a href={"tel:" + phone}>
-            {phone}{" "}
-          </a>
+          <a href={"tel:" + phone}>{phone} </a>
           for enquiries!
         </p>
-      )
-    } 
+      );
+    }
   };
+  const [heartColour, setHeartColour] = useState("black");
+  const handleClick = () => {
+    heartColour === "black" ? setHeartColour("red") : setHeartColour("black")
+  }
 
   return (
     <div className={styles.results} style={{ position: "relative" }}>
@@ -78,6 +72,9 @@ const Details = (props) => {
         {resultToDisplay.name}{" "}
         <span style={{ float: "right" }}>{resultToDisplay.rating}/5</span>
       </h3>
+      <button onClick = {handleClick}>
+        <i class="fa fa-heart" style={{color:`${heartColour}`}}/> I want!
+      </button>
       <div className={styles.rating}>
         <ReactStars
           value={resultToDisplay.rating}

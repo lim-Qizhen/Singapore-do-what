@@ -14,7 +14,7 @@ const NavBar = () => {
                         <Link to="/search">Search</Link>
                     </li>
                     <li>
-                        You finally decided.
+                        <Link to="/plan">Plan</Link>
                     </li>
                 </ul>
             </nav>

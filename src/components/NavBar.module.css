@@ -3,6 +3,9 @@
   background-color: rgba(248, 242, 218, 0.6);
   color: grey;
   position: sticky;
+  text-align: center;
+  font-family: "Julius Sans One", sans-serif;
+  font-size: medium;
 }
 
 .navbar nav {

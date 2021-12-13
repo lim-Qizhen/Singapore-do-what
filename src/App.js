@@ -38,7 +38,7 @@ function App() {
       setResults(attractions.data);
       //console.log(attractions.data);
     } catch (err) {
-      console.log(err.message);
+      alert(err.message);
     }
   };
   const [userInput, setUserInput] = useState("");
@@ -47,12 +47,6 @@ function App() {
     fetchAttractions(baseURL);
     setHasSearched(true);
     setUserInput(input);
-  };
-
-  const displayData = (foundResults) => {
-    if (foundResults.length === 0) {
-      alert("Your search did not yield any result.");
-    }
   };
 
   const [hasSearched, setHasSearched] = useState(false);
