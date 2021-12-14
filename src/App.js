@@ -5,6 +5,7 @@ import SearchResults from "./components/SearchResults";
 import { BrowserRouter, Route } from "react-router-dom";
 import Details from "./components/Details";
 import Home from "./components/Home";
+import Plan from "./components/Plan";
 
 function App() {
   /////Background Image/////
@@ -48,8 +49,10 @@ function App() {
     setHasSearched(true);
     setUserInput(input);
   };
-
   const [hasSearched, setHasSearched] = useState(false);
+
+  /////Retrieving Liked activities for Plan
+  const [wishlist, setWishlist] = useState(["activity1", "activity2"]);
 
   return (
     <body style={webpageStyles}>
@@ -72,6 +75,9 @@ function App() {
           </Route>
           <Route path="/search/:name">
             <Details results={results} user={userInput} />
+          </Route>
+          <Route path = "/plan">
+            <Plan wishlist = {wishlist}></Plan>
           </Route>
         </BrowserRouter>
       </div>

@@ -24,7 +24,7 @@ const Details = (props) => {
             value={review.rating}
             size={18}
             isHalf={true}
-            edit={true}
+            edit={false}
             activeColor="rgb(248, 162, 42)"
           />
         </div>
@@ -62,9 +62,11 @@ const Details = (props) => {
     }
   };
   const [heartColour, setHeartColour] = useState("black");
+  const [liked, setLiked] = useState(false);
   const handleClick = () => {
-    heartColour === "black" ? setHeartColour("red") : setHeartColour("black")
-  }
+    liked === true ? setLiked(false) : setLiked(true);
+    heartColour === "black" ? setHeartColour("red") : setHeartColour("black");
+  };
 
   return (
     <div className={styles.results} style={{ position: "relative" }}>
@@ -72,8 +74,8 @@ const Details = (props) => {
         {resultToDisplay.name}{" "}
         <span style={{ float: "right" }}>{resultToDisplay.rating}/5</span>
       </h3>
-      <button onClick = {handleClick}>
-        <i class="fa fa-heart" style={{color:`${heartColour}`}}/> I want!
+      <button onClick={handleClick}>
+        <i class="fa fa-heart" style={{ color: `${heartColour}` }} /> I want!
       </button>
       <div className={styles.rating}>
         <ReactStars
@@ -98,7 +100,11 @@ const Details = (props) => {
         Official Website: <> </>
         {resultToDisplay.officialWebsite.length !== 0 ? (
           <a
-            href={"https://" + resultToDisplay.officialWebsite}
+            href={
+              resultToDisplay.officialWebsite[0] === "h"
+                ? resultToDisplay.officialWebsite
+                : "https://" + resultToDisplay.officialWebsite
+            }
             target="_blank"
             rel="noopener noreferrer"
           >
