@@ -1,14 +1,22 @@
 import React, { useState } from "react";
 
 const Plan = (props) => {
-    console.log(typeof props.wishlist)
-
-  const handleAdd = () => {
-    console.log("clicked!");
-  };
-  
   const wishlistDisplay = props.wishlist.map((want) => {
-    return <p><i className="fa fa-heart"></i><span style={{fontFamily: "Julius Sans One, sans-serif", padding: "5px", listStyle: "none"}}>{want}</span><br/></p>;
+    return (
+      <p>
+        <i className="fa fa-heart"></i>
+        <span
+          style={{
+            fontFamily: "Julius Sans One, sans-serif",
+            padding: "5px",
+            listStyle: "none",
+          }}
+        >
+          {want}
+        </span>
+        <br />
+      </p>
+    );
   });
   const wishlistStyles = {
     backgroundColor: "rgba(255, 255, 255, 0.6)",
@@ -26,19 +34,37 @@ const Plan = (props) => {
     width: "300px",
     flexGrow: "2",
   };
-  
-  const itinerary = (
-        <div style={{ display: "flex", alignItems: "center"}}>
-            <input placeholder="time" type="time" step="15min" required></input>
-            <select style={{ margin:"auto", marginLeft: "10px", flexGrow: "2" }}>
-            {props.wishlist.map((want)=>{
-                return(<option>{want}</option>)
-            })}
-            </select>
-            <i style={{ marginLeft:"10px"}} class="fa fa-minus-circle"></i>
+  const [time, setTime] = useState();
+  const [plan, setPlan] = useState([{ time: "", activity: "" }]);
+  const handleTimeChange = (e) => {
+    console.log(typeof e.target.value);
+  };
+
+  const itinerary = plan.map((event, index) => {
+    return (
+      <div id = {index} style={{ display: "flex", alignItems: "center" }}>
+        <input
+          type="time"
+          onChange={handleTimeChange}
+          value={time}
+          required
+        ></input>
+        <select style={{ margin: "auto", marginLeft: "10px", flexGrow: "2" }}>
+          {props.wishlist.map((want) => {
+            return <option>{want}</option>;
+          })}
+        </select>
+        <i style={{ marginLeft: "10px" }} class="fa fa-minus-circle"></i>
       </div>
-      )
-  
+    );
+  });
+
+  const handleAdd = () => {
+    console.log("clicked!");
+    setPlan((prevState) => {
+        return [...prevState, {time:"", activity:""}]
+    })
+  };
 
   return (
     <div style={{ display: "flex" }}>
@@ -65,12 +91,12 @@ const Plan = (props) => {
           The Plan
         </p>
         {itinerary}
-        <br/>
+        <br />
         <i
           className="fa fa-plus-circle"
           style={{ cursor: "pointer", fontSize: "20px", float: "right" }}
           onClick={handleAdd}
-        ></i> 
+        ></i>
       </div>
     </div>
   );
