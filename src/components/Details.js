@@ -67,8 +67,6 @@ const Details = (props) => {
   let heartColour = "black";
   inWishlist ? (heartColour = "red") : (heartColour = "black");
 
-  console.log(props.wishlist);
-
   const handleClick = (e) => {
     if (!inWishlist) {
       props.onLike((prevState) => {

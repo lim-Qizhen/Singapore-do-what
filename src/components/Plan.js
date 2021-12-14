@@ -6,9 +6,9 @@ const Plan = (props) => {
   const handleAdd = () => {
     console.log("clicked!");
   };
-  props.wishlist.forEach((want) => console.log(want))
+  
   const wishlistDisplay = props.wishlist.map((want) => {
-    return <li style={{fontFamily: "Julius Sans One, sans-serif", padding: "2px"}}>{want}</li>;
+    return <p><i className="fa fa-heart"></i><span style={{fontFamily: "Julius Sans One, sans-serif", padding: "5px", listStyle: "none"}}>{want}</span><br/></p>;
   });
   const wishlistStyles = {
     backgroundColor: "rgba(255, 255, 255, 0.6)",
@@ -28,9 +28,9 @@ const Plan = (props) => {
   };
   
   const itinerary = (
-        <div style={{ display: "flex" }}>
+        <div style={{ display: "flex", alignItems: "center"}}>
             <input placeholder="time" type="time" step="15min" required></input>
-            <select style={{ marginLeft: "10px", flexGrow: "2" }}>
+            <select style={{ margin:"auto", marginLeft: "10px", flexGrow: "2" }}>
             {props.wishlist.map((want)=>{
                 return(<option>{want}</option>)
             })}
@@ -52,7 +52,7 @@ const Plan = (props) => {
         >
           Your Wishlist
         </p>
-        <ul>{wishlistDisplay}</ul>
+        {wishlistDisplay}
       </div>
       <div style={planStyles}>
         <p
@@ -68,7 +68,7 @@ const Plan = (props) => {
         <br/>
         <i
           className="fa fa-plus-circle"
-          style={{ cursor: "pointer", fontSize: "30px", float: "right" }}
+          style={{ cursor: "pointer", fontSize: "20px", float: "right" }}
           onClick={handleAdd}
         ></i> 
       </div>
