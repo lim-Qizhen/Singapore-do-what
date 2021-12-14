@@ -34,36 +34,46 @@ const Plan = (props) => {
     width: "300px",
     flexGrow: "2",
   };
-  const [time, setTime] = useState();
+
   const [plan, setPlan] = useState([{ time: "", activity: "" }]);
   const handleTimeChange = (e) => {
-    console.log(typeof e.target.value);
+    console.log(e.target.value);
+  };
+
+  const handleDelete = (e) => {
+    console.log(plan);
+    console.log(parseInt(e.target.id))
+
+    setPlan((prevState) => {
+      return [...prevState].filter((element, index) => index !== parseInt(e.target.id));
+    });
   };
 
   const itinerary = plan.map((event, index) => {
     return (
-      <div id = {index} style={{ display: "flex", alignItems: "center" }}>
-        <input
-          type="time"
-          onChange={handleTimeChange}
-          value={time}
-          required
-        ></input>
+      <div
+        style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}
+      >
+        <input type="time" onChange={handleTimeChange} required></input>
         <select style={{ margin: "auto", marginLeft: "10px", flexGrow: "2" }}>
           {props.wishlist.map((want) => {
             return <option>{want}</option>;
           })}
         </select>
-        <i style={{ marginLeft: "10px" }} class="fa fa-minus-circle"></i>
+        <i
+          onClick={handleDelete}
+          style={{ marginLeft: "10px" }}
+          class="fa fa-minus-circle"
+          id={index}
+        ></i>
       </div>
     );
   });
 
   const handleAdd = () => {
-    console.log("clicked!");
     setPlan((prevState) => {
-        return [...prevState, {time:"", activity:""}]
-    })
+      return [...prevState, { time: "", activity: "" }];
+    });
   };
 
   return (
