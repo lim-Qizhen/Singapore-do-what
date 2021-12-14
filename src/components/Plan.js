@@ -24,6 +24,7 @@ const Plan = (props) => {
     marginTop: "50px",
     padding: "10px",
     minWidth: "160px",
+    flexBasis: "280px",
   };
   const planStyles = {
     backgroundColor: "rgba(255, 255, 255, 0.6)",
@@ -31,15 +32,16 @@ const Plan = (props) => {
     marginRight: "50px",
     marginTop: "50px",
     padding: "10px",
-    minWidth: "350px",
     flexGrow: "2",
+    flexBasis: "content",
+    flexShrink: "0",
   };
 
   const [plan, setPlan] = useState([{ time: "", activity: "" }]);
   /////This function is just to make sure we delete the right row
   const handleTimeChange = (e) => {
-    plan[e.target.id].time = e.target.value
-    setPlan([...plan])
+    plan[e.target.id].time = e.target.value;
+    setPlan([...plan]);
   };
 
   const handleDelete = (e) => {
@@ -56,21 +58,29 @@ const Plan = (props) => {
         style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}
       >
         <input
-          style={{ flexShrink: "0" }}
+          style={{ flexBasis: "content", flexShrink: "0", flexGrow: "0"}}
           type="time"
           id={index}
           onChange={handleTimeChange}
           value={plan[index].time}
           required
         ></input>
-        <select style={{ margin: "auto", marginLeft: "10px", flexGrow: "2" }}>
+        <select
+          style={{
+            margin: "auto",
+            marginLeft: "10px",
+            flexGrow: "2",
+            flexBasis: "content",
+            flexShrink: "0",
+          }}
+        >
           {props.wishlist.map((want) => {
             return <option>{want}</option>;
           })}
         </select>
         <i
           onClick={handleDelete}
-          style={{ marginLeft: "10px" }}
+          style={{ marginLeft: "10px", cursor: "pointer" }}
           class="fa fa-minus-circle"
           id={index}
         ></i>

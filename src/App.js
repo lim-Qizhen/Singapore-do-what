@@ -27,6 +27,7 @@ function App() {
     backgroundPosition: "center",
     minHeight: "100vh",
     backgroundSize: "cover",
+    minWidth: "100vh"
   };
 
   /////Retrieving Search Results/////
@@ -56,7 +57,7 @@ function App() {
 
   return (
     <body style={webpageStyles}>
-      <div >
+      < >
         <BrowserRouter>
           <NavBar />
           <Route exact path="/">
@@ -80,7 +81,7 @@ function App() {
             <Plan wishlist = {wishlist}></Plan>
           </Route>
         </BrowserRouter>
-      </div>
+      </>
       <br/>
     </body>
   );
