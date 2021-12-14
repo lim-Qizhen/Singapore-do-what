@@ -45,11 +45,13 @@ const Plan = (props) => {
   };
 
   const handleDelete = (e) => {
-    setPlan((prevState) => {
-      return [...prevState].filter(
-        (element, index) => index !== parseInt(e.target.id)
-      );
-    });
+    if (plan.length > 1) {
+      setPlan((prevState) => {
+        return [...prevState].filter(
+          (element, index) => index !== parseInt(e.target.id)
+        );
+      });
+    }
   };
 
   const itinerary = plan.map((event, index) => {
@@ -58,7 +60,7 @@ const Plan = (props) => {
         style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}
       >
         <input
-          style={{ flexBasis: "content", flexShrink: "0", flexGrow: "0"}}
+          style={{ flexBasis: "content", flexShrink: "0", flexGrow: "0" }}
           type="time"
           id={index}
           onChange={handleTimeChange}
@@ -74,8 +76,11 @@ const Plan = (props) => {
             flexShrink: "0",
           }}
         >
+          <option value="" disabled selected hidden>
+            Choose your activity
+          </option>
           {props.wishlist.map((want) => {
-            return <option>{want}</option>;
+            return <option value={`${want}`}>{want}</option>;
           })}
         </select>
         <i
@@ -95,7 +100,7 @@ const Plan = (props) => {
   };
 
   return (
-    <div style={{ display: "flex" }}>
+    <div style={{ display: "flex", alignItems: "flex-start" }}>
       <div className="wishlist" style={wishlistStyles}>
         <p
           style={{
