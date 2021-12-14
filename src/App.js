@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import NavBar from "./components/NavBar";
 import Search from "./components/Search";
 import SearchResults from "./components/SearchResults";
@@ -52,7 +52,7 @@ function App() {
   const [hasSearched, setHasSearched] = useState(false);
 
   /////Retrieving Liked activities for Plan
-  const [wishlist, setWishlist] = useState(["activity1", "activity2"]);
+  const [wishlist, setWishlist] = useState([]);
 
   return (
     <body style={webpageStyles}>
@@ -74,7 +74,7 @@ function App() {
             )}
           </Route>
           <Route path="/search/:name">
-            <Details results={results} user={userInput} />
+            <Details onLike={setWishlist} results={results} user={userInput} wishlist={wishlist}/>
           </Route>
           <Route path = "/plan">
             <Plan wishlist = {wishlist}></Plan>

@@ -8,7 +8,6 @@ const Details = (props) => {
   const params = useParams();
   const names = props.results.map((result) => result.name);
   const resultToDisplay = props.results[names.indexOf(params.name)];
-  console.log(resultToDisplay.officialEmail);
   const allReviews = resultToDisplay.reviews;
   const reviewsDisplay = allReviews.map((review) => {
     return (
@@ -61,11 +60,25 @@ const Details = (props) => {
       );
     }
   };
-  const [heartColour, setHeartColour] = useState("black");
-  const [liked, setLiked] = useState(false);
-  const handleClick = () => {
-    liked === true ? setLiked(false) : setLiked(true);
-    heartColour === "black" ? setHeartColour("red") : setHeartColour("black");
+
+  const wishlistIndex = props.wishlist.indexOf(resultToDisplay.name);
+  const inWishlist = wishlistIndex !== -1;
+  /////setting Heart Colour
+  let heartColour = "black";
+  inWishlist ? (heartColour = "red") : (heartColour = "black");
+
+  console.log(props.wishlist);
+
+  const handleClick = (e) => {
+    if (!inWishlist) {
+      props.onLike((prevState) => {
+        return [...prevState, resultToDisplay.name];
+      });
+    } else{
+      props.onLike((prevState) => {
+        return [...prevState].filter((element, index) => index !== wishlistIndex)
+      })
+    }
   };
 
   return (
@@ -75,7 +88,8 @@ const Details = (props) => {
         <span style={{ float: "right" }}>{resultToDisplay.rating}/5</span>
       </h3>
       <button onClick={handleClick}>
-        <i class="fa fa-heart" style={{ color: `${heartColour}` }} /> I want!
+        <i className="fa fa-heart" style={{ color: `${heartColour}` }} /> I
+        want!
       </button>
       <div className={styles.rating}>
         <ReactStars
@@ -96,6 +110,7 @@ const Details = (props) => {
       <p className={styles.general}>
         Nearest MRT station: {resultToDisplay.nearestMrtStation}
       </p>
+      {/* Official Website */}
       <p className={styles.general}>
         Official Website: <> </>
         {resultToDisplay.officialWebsite.length !== 0 ? (
@@ -116,6 +131,7 @@ const Details = (props) => {
           "-"
         )}
       </p>
+      {/* Price */}
       <p className={styles.general}>
         Pricing:{" "}
         {resultToDisplay.pricing.others.length !== 0
