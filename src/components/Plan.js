@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, createRef } from "react";
+import DisplayMapClass from "./DisplayMapClass";
+import H from "@here/maps-api-for-javascript";
 
 const Plan = (props) => {
   const wishlistDisplay = props.wishlist.map((want) => {
@@ -38,17 +40,14 @@ const Plan = (props) => {
   };
 
   const [plan, setPlan] = useState([{ time: "", activity: "" }]);
-  /////This function is just to make sure we delete the right row
+  /////These functions are just to make sure we delete the right row
   const handleTimeChange = (e) => {
     plan[e.target.id].time = e.target.value;
     setPlan([...plan]);
   };
 
   const handleActivityChange = (e) => {
-    // console.log(e.target.value)
-    // console.log(e.target.id)
     plan[e.target.id].activity = e.target.value;
-    console.log(plan);
     setPlan([...plan]);
   };
 
@@ -86,7 +85,6 @@ const Plan = (props) => {
           onChange={handleActivityChange}
           value={plan[index].activity}
           id={index}
-          defaultValue=""
         >
           <option value="" disabled hidden>
             Choose your activity
@@ -110,6 +108,22 @@ const Plan = (props) => {
       return [...prevState, { time: "", activity: "" }];
     });
   };
+
+  // const platform = new H.service.Platform({
+  //   apikey: "PQXjrqipEq_9dEtEbGpmnSBXUOOhjS20oZb1DrTlSYE",
+  // });
+
+  // const defaultLayers = platform.createDefaultLayers();
+  // console.log(defaultLayers)
+  // const mapRef=createRef(document.getElementById("mapdiv"));
+  // var map = new H.Map(
+  //   mapRef,
+  //   defaultLayers.vector.normal.map,
+  //   {
+  //     center: { lat: 0, lng: 51 },
+  //     zoom: 8,
+  //   }
+  // );
 
   return (
     <div style={{ display: "flex", alignItems: "flex-start" }}>
@@ -143,6 +157,7 @@ const Plan = (props) => {
           onClick={handleAdd}
         ></i>
       </div>
+      <DisplayMapClass/>
     </div>
   );
 };

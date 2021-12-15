@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import styles from "./Results.module.css";
 import ReactStars from "react-rating-stars-component";
 import { Markup } from "interweave";
+import DisplayMapClass from "./DisplayMapClass";
 
 const Details = (props) => {
   const params = useParams();
@@ -72,12 +73,25 @@ const Details = (props) => {
       props.onLike((prevState) => {
         return [...prevState, resultToDisplay.name];
       });
-    } else{
+    } else {
       props.onLike((prevState) => {
-        return [...prevState].filter((element, index) => index !== wishlistIndex)
-      })
+        return [...prevState].filter(
+          (element, index) => index !== wishlistIndex
+        );
+      });
     }
   };
+
+  /////getting map
+  // const platform = new H.service.Platform({
+  //   apikey: "PQXjrqipEq_9dEtEbGpmnSBXUOOhjS20oZb1DrTlSYE",
+  // });
+  // const maptypes = platform.createDefaultLayers();
+  // console.log(maptypes);
+  // const map = new H.Map(document.getElementById('mapdiv'), maptypes.vector.normal.map, {
+  //   center: {lat: 0, lng: 51},
+  //   zoom: 8
+  // });
 
   return (
     <div className={styles.results} style={{ position: "relative" }}>
@@ -139,6 +153,7 @@ const Details = (props) => {
       {contactDisplay(phone, email)}
       {resultToDisplay.description}
       <Markup content={resultToDisplay.body} />
+      <h4>Location</h4>
       <br />
       <h4>
         Reviews{" "}

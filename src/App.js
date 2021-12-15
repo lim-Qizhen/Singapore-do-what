@@ -55,15 +55,14 @@ function App() {
   /////Retrieving Liked activities for Plan
   const [wishlist, setWishlist] = useState([]);
 
+
+  
   return (
     <div style={webpageStyles}>
       < >
         <BrowserRouter>
-          <NavBar />
+          <NavBar onSearch={setHasSearched}/>
           <Route exact path="/">
-            <Home onClick={setHasSearched}/>
-          </Route>
-          <Route exact path="/search">
             {hasSearched ? (
               <SearchResults
                 onSubmit={retrieveData}
