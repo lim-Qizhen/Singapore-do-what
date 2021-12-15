@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useParams } from "react-router";
 import styles from "./Results.module.css";
 import ReactStars from "react-rating-stars-component";

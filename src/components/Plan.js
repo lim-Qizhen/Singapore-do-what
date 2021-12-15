@@ -44,6 +44,14 @@ const Plan = (props) => {
     setPlan([...plan]);
   };
 
+  const handleActivityChange = (e) => {
+    // console.log(e.target.value)
+    // console.log(e.target.id)
+    plan[e.target.id].activity = e.target.value;
+    console.log(plan);
+    setPlan([...plan]);
+  };
+
   const handleDelete = (e) => {
     if (plan.length > 1) {
       setPlan((prevState) => {
@@ -75,8 +83,12 @@ const Plan = (props) => {
             flexBasis: "content",
             flexShrink: "0",
           }}
+          onChange={handleActivityChange}
+          value={plan[index].activity}
+          id={index}
+          defaultValue=""
         >
-          <option value="" disabled selected hidden>
+          <option value="" disabled hidden>
             Choose your activity
           </option>
           {props.wishlist.map((want) => {
@@ -86,7 +98,7 @@ const Plan = (props) => {
         <i
           onClick={handleDelete}
           style={{ marginLeft: "10px", cursor: "pointer" }}
-          class="fa fa-minus-circle"
+          className="fa fa-minus-circle"
           id={index}
         ></i>
       </div>

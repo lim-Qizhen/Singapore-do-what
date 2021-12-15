@@ -56,7 +56,7 @@ function App() {
   const [wishlist, setWishlist] = useState([]);
 
   return (
-    <body style={webpageStyles}>
+    <div style={webpageStyles}>
       < >
         <BrowserRouter>
           <NavBar />
@@ -83,7 +83,7 @@ function App() {
         </BrowserRouter>
       </>
       <br/>
-    </body>
+    </div>
   );
 }
 
