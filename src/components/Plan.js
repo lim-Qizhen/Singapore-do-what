@@ -13,7 +13,7 @@ const Plan = (props) => {
             listStyle: "none",
           }}
         >
-          {want}
+          {want.name}
         </span>
         <br />
       </p>
@@ -38,7 +38,9 @@ const Plan = (props) => {
     flexShrink: "0",
   };
 
-  const [plan, setPlan] = useState([{ time: "", activity: "" }]);
+  const [plan, setPlan] = useState([
+    { time: "", activity: "", lat: 0, long: 0 },
+  ]);
   /////These functions are just to make sure we delete the right row
   const handleTimeChange = (e) => {
     plan[e.target.id].time = e.target.value;
@@ -47,6 +49,16 @@ const Plan = (props) => {
 
   const handleActivityChange = (e) => {
     plan[e.target.id].activity = e.target.value;
+    //finding latitude and longitude to save for mapping
+    let wishlistIndex = -1;
+    props.wishlist.forEach((element, index) =>
+      element.name === e.target.value
+        ? (wishlistIndex = index)
+        : (wishlistIndex = -1)
+    );
+    // console.log(props.wishlist[wishlistIndex].lat);
+    plan[e.target.id].lat = props.wishlist[wishlistIndex].lat;
+    plan[e.target.id].long = props.wishlist[wishlistIndex].long;
     setPlan([...plan]);
   };
 
@@ -89,7 +101,7 @@ const Plan = (props) => {
             Choose your activity
           </option>
           {props.wishlist.map((want) => {
-            return <option value={`${want}`}>{want}</option>;
+            return <option value={`${want.name}`}>{want.name}</option>;
           })}
         </select>
         <i
@@ -108,59 +120,43 @@ const Plan = (props) => {
     });
   };
 
-  // const platform = new H.service.Platform({
-  //   apikey: "PQXjrqipEq_9dEtEbGpmnSBXUOOhjS20oZb1DrTlSYE",
-  // });
-
-  // const defaultLayers = platform.createDefaultLayers();
-  // console.log(defaultLayers)
-  // const mapRef=createRef(document.getElementById("mapdiv"));
-  // var map = new H.Map(
-  //   mapRef,
-  //   defaultLayers.vector.normal.map,
-  //   {
-  //     center: { lat: 0, lng: 51 },
-  //     zoom: 8,
-  //   }
-  // );
-
   return (
     <>
-    <div style={{ display: "flex", alignItems: "flex-start" }}>
-      <div className="wishlist" style={wishlistStyles}>
-        <p
-          style={{
-            margin: "0",
-            fontFamily: "Corinthia, cursive",
-            fontSize: "xx-large",
-          }}
-        >
-          Your Wishlist
-        </p>
-        {wishlistDisplay}
+      <div style={{ display: "flex", alignItems: "flex-start" }}>
+        <div className="wishlist" style={wishlistStyles}>
+          <p
+            style={{
+              margin: "0",
+              fontFamily: "Corinthia, cursive",
+              fontSize: "xx-large",
+            }}
+          >
+            Your Wishlist
+          </p>
+          {wishlistDisplay}
+        </div>
+        <div style={planStyles}>
+          <p
+            style={{
+              margin: "0",
+              fontFamily: "Corinthia, cursive",
+              fontSize: "xx-large",
+            }}
+          >
+            The Plan
+          </p>
+          {itinerary}
+          <br />
+          <i
+            className="fa fa-plus-circle"
+            style={{ cursor: "pointer", fontSize: "20px", float: "right" }}
+            onClick={handleAdd}
+          ></i>
+        </div>
       </div>
-      <div style={planStyles}>
-        <p
-          style={{
-            margin: "0",
-            fontFamily: "Corinthia, cursive",
-            fontSize: "xx-large",
-          }}
-        >
-          The Plan
-        </p>
-        {itinerary}
-        <br />
-        <i
-          className="fa fa-plus-circle"
-          style={{ cursor: "pointer", fontSize: "20px", float: "right" }}
-          onClick={handleAdd}
-        ></i>
-      </div>
-    </div>
-    <br/>
-      <div style={{textAlign: "center", justifyContent: "center"}}>
-        <DisplayMapClass />
+      <br />
+      <div style={{ textAlign: "center", justifyContent: "center" }}>
+        <DisplayMapClass plan={plan} />
       </div>
     </>
   );

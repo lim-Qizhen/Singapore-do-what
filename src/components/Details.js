@@ -61,8 +61,11 @@ const Details = (props) => {
       );
     }
   };
-
-  const wishlistIndex = props.wishlist.indexOf(resultToDisplay.name);
+  /////determining if already in wishlist
+  let wishlistIndex = -1;
+  props.wishlist.forEach((element, index) => {
+    element.name === resultToDisplay.name? wishlistIndex = index:wishlistIndex=-1;
+  });
   const inWishlist = wishlistIndex !== -1;
   /////setting Heart Colour
   let heartColour = "black";
@@ -71,7 +74,7 @@ const Details = (props) => {
   const handleClick = (e) => {
     if (!inWishlist) {
       props.onLike((prevState) => {
-        return [...prevState, resultToDisplay.name];
+        return [...prevState, {name: resultToDisplay.name, lat: resultToDisplay.location.latitude, long: resultToDisplay.location.longitude}];
       });
     } else {
       props.onLike((prevState) => {
