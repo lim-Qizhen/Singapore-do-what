@@ -1,25 +1,46 @@
-import React from "react";
-import H from "@here/maps-api-for-javascript";
+// src/DisplayMapClass.js
+import * as React from "react";
 
-const DisplayMapClass = () => {
-  const mapRef = React.createRef("");
-  console.log(mapRef); //null
-  //   const H = window.H;
-  const platform = new H.service.Platform({
-    apikey: "PQXjrqipEq_9dEtEbGpmnSBXUOOhjS20oZb1DrTlSYE",
-  });
+export class DisplayMapClass extends React.Component {
+  mapRef = React.createRef();
 
-  const defaultLayers = platform.createDefaultLayers();
-  console.log(defaultLayers);
+  state = {
+    // The map instance to use during cleanup
+    map: null,
+  };
 
-  const map = new H.Map(mapRef.current, defaultLayers.vector.normal.map, {
-    center: { lat: 50, lng: 5 },
-    zoom: 4,
-    pixelRatio: window.devicePixelRatio || 1,
-  });
-  console.log(map);
+  componentDidMount() {
+    const H = window.H;
+    const platform = new H.service.Platform({
+      apikey: "{HERE-API-KEY}",
+    });
 
-  return <div ref={mapRef} style={{ width: "300px", height: "500px" }}></div>;
-};
+    const defaultLayers = platform.createDefaultLayers();
 
-export default DisplayMapClass;
+    // Create an instance of the map
+    const map = new H.Map(
+      this.mapRef.current,
+      defaultLayers.vector.normal.map,
+      {
+        // This map is centered over Europe
+        center: { lat: 1.29, lng: 103.85 },
+        zoom: 15,
+        // pixelRatio: window.devicePixelRatio || 1,
+      }
+    );
+
+    this.setState({ map });
+  }
+
+//   componentWillUnmount() {
+//     // Cleanup after the map to avoid memory leaks when this component exits the page
+//     this.state.map.dispose();
+//   }
+
+  render() {
+    return (
+      // Set a height on the map so it will display
+      <div ref={this.mapRef} style={{margin: "0 auto", width: "500px", height: "500px" }} />
+    );
+  }
+}

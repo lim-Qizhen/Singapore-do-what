@@ -1,6 +1,5 @@
 import React, { useState, createRef } from "react";
-import DisplayMapClass from "./DisplayMapClass";
-import H from "@here/maps-api-for-javascript";
+import { DisplayMapClass } from "./DisplayMapClass";
 
 const Plan = (props) => {
   const wishlistDisplay = props.wishlist.map((want) => {
@@ -126,6 +125,7 @@ const Plan = (props) => {
   // );
 
   return (
+    <>
     <div style={{ display: "flex", alignItems: "flex-start" }}>
       <div className="wishlist" style={wishlistStyles}>
         <p
@@ -157,8 +157,12 @@ const Plan = (props) => {
           onClick={handleAdd}
         ></i>
       </div>
-      <DisplayMapClass/>
     </div>
+    <br/>
+      <div style={{textAlign: "center", justifyContent: "center"}}>
+        <DisplayMapClass />
+      </div>
+    </>
   );
 };
 

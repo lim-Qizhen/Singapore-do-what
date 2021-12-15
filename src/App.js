@@ -4,7 +4,6 @@ import Search from "./components/Search";
 import SearchResults from "./components/SearchResults";
 import { BrowserRouter, Route } from "react-router-dom";
 import Details from "./components/Details";
-import Home from "./components/Home";
 import Plan from "./components/Plan";
 
 function App() {

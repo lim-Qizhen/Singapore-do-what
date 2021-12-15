@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 import styles from "./Results.module.css";
 import ReactStars from "react-rating-stars-component";
 import { Markup } from "interweave";
-import DisplayMapClass from "./DisplayMapClass";
+import DisplayMapClass from "./DisplayMapFunction";
 
 const Details = (props) => {
   const params = useParams();
