@@ -38,6 +38,7 @@ export class DisplayMapClass extends React.Component {
     this.state.map.removeObjects(this.state.map.getObjects());
     console.log(this.props.plan);
     this.props.plan.map((element, index) => {
+      console.log(element.activity)
       if (element.activity.length > 1) {
         const svgMarkup =
           '<svg width="24" height="24" ' +

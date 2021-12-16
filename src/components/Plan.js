@@ -61,13 +61,17 @@ const Plan = (props) => {
     plan[e.target.id].lat = props.wishlist[wishlistIndex].lat;
     //need to find repeats in plan to right shift the marker on the map
     const sameElementsAlreadyPlanned = plan.filter((element) => element.activity === e.target.value);
-    console.log(sameElementsAlreadyPlanned)
-    
+
     plan[e.target.id].long = props.wishlist[wishlistIndex].long + (sameElementsAlreadyPlanned.length - 1)*0.01;
+
     setPlan([...plan]);
   };
-  console.log(plan)
+  
   const handleDelete = (e) => {
+    console.log(e.target)//e.target gives the minus icon element which has id
+    console.log(plan[parseInt(e.target.id)].activity)
+    //need to find how many of the current names exist
+    // const sameElementsAlreadyPlanned = plan.filter((element) => element.activity === plan[parseInt(e.target.id)]);
     if (plan.length > 1) {
       setPlan((prevState) => {
         return [...prevState].filter(
