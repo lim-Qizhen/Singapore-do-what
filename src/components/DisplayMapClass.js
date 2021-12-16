@@ -42,11 +42,11 @@ export class DisplayMapClass extends React.Component {
       if (element.activity.length > 1) {
         console.log(element);
         if (
-          this.state.map.getObjects().some((marker) => {
-            marker.b.lat === element.lat;
-          })
+          this.state.map
+            .getObjects()
+            .some((marker) => marker.b.lng === element.long)
         ) {
-          element.lat = element.lat + 0.1;
+          element.long += 0.01;
         }
 
         const svgMarkup =
