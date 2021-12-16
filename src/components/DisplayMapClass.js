@@ -13,7 +13,7 @@ export class DisplayMapClass extends React.Component {
   componentDidMount() {
     const H = window.H;
     const platform = new H.service.Platform({
-      apikey: "PQXjrqipEq_9dEtEbGpmnSBXUOOhjS20oZb1DrTlSY",
+      apikey: "PQXjrqipEq_9dEtEbGpmnSBXUOOhjS20oZb1DrTlSYE",
     });
 
     const defaultLayers = platform.createDefaultLayers();
@@ -24,19 +24,22 @@ export class DisplayMapClass extends React.Component {
       defaultLayers.vector.normal.map,
       {
         // This map is centered over Singapore
-        center: { lat: 1.29, lng: 103.85 },
-        zoom: 10,
+        center: { lat: 1.34, lng: 103.82 },
         // pixelRatio: window.devicePixelRatio || 1,
       }
     );
+    map.setZoom(11.35);
     this.setState({ map });
+    //this.state.map.setZoom(11.35);
   }
 
   componentDidUpdate() {
     const H = window.H;
+    //removes all previous ones in case of changes
+    this.state.map.removeObjects(this.state.map.getObjects());
     console.log(this.props.plan);
     this.props.plan.map((element, index) => {
-      console.log(element);
+      // console.log(element);
       if (element.activity.length > 1) {
         const svgMarkup =
           '<svg width="24" height="24" ' +
@@ -49,7 +52,7 @@ export class DisplayMapClass extends React.Component {
         const coords = { lat: element.lat, lng: element.long };
         const marker = new H.map.Marker(coords, { icon: icon });
         this.state.map.addObject(marker);
-        //this.state.map.setZoom(14);
+        // this.state.map.setZoom(11.35);
       }
     });
   }

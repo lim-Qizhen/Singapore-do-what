@@ -1,7 +1,8 @@
-import React, { useState, createRef } from "react";
+import React, { useState } from "react";
 import { DisplayMapClass } from "./DisplayMapClass";
 
 const Plan = (props) => {
+  console.log(props.wishlist[0])
   const wishlistDisplay = props.wishlist.map((want) => {
     return (
       <p>
@@ -50,18 +51,20 @@ const Plan = (props) => {
   const handleActivityChange = (e) => {
     plan[e.target.id].activity = e.target.value;
     //finding latitude and longitude to save for mapping
-    let wishlistIndex = -1;
-    props.wishlist.forEach((element, index) =>
-      element.name === e.target.value
-        ? (wishlistIndex = index)
-        : (wishlistIndex = -1)
-    );
-    // console.log(props.wishlist[wishlistIndex].lat);
+    let wishlistIndex ;
+    for (let i = 0; i < props.wishlist.length; i++){
+      if(props.wishlist[i].name === e.target.value){
+        wishlistIndex = i;
+      }
+    }
+    
+    console.log(wishlistIndex)
+    console.log(props.wishlist[wishlistIndex])
     plan[e.target.id].lat = props.wishlist[wishlistIndex].lat;
     plan[e.target.id].long = props.wishlist[wishlistIndex].long;
     setPlan([...plan]);
   };
-
+  console.log(plan)
   const handleDelete = (e) => {
     if (plan.length > 1) {
       setPlan((prevState) => {
