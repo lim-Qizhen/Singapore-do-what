@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { DisplayMapClass } from "./DisplayMapClass";
 
 const Plan = (props) => {
-  console.log(props.wishlist[0])
+  console.log(props.wishlist[0]);
   const wishlistDisplay = props.wishlist.map((want) => {
     return (
       <p>
@@ -51,27 +51,29 @@ const Plan = (props) => {
   const handleActivityChange = (e) => {
     plan[e.target.id].activity = e.target.value;
     //finding latitude and longitude to save for mapping
-    let wishlistIndex ;
-    for (let i = 0; i < props.wishlist.length; i++){
-      if(props.wishlist[i].name === e.target.value){
+    let wishlistIndex;
+    for (let i = 0; i < props.wishlist.length; i++) {
+      if (props.wishlist[i].name === e.target.value) {
         wishlistIndex = i;
       }
     }
 
     plan[e.target.id].lat = props.wishlist[wishlistIndex].lat;
     //need to find repeats in plan to right shift the marker on the map
-    const sameElementsAlreadyPlanned = plan.filter((element) => element.activity === e.target.value);
+    const sameElementsAlreadyPlanned = plan.filter(
+      (element) => element.activity === e.target.value
+    );
 
-    plan[e.target.id].long = props.wishlist[wishlistIndex].long + (sameElementsAlreadyPlanned.length - 1)*0.01;
+    plan[e.target.id].long =
+      props.wishlist[wishlistIndex].long +
+      (sameElementsAlreadyPlanned.length - 1) * 0.01;
 
     setPlan([...plan]);
   };
-  
+
   const handleDelete = (e) => {
-    console.log(e.target)//e.target gives the minus icon element which has id
-    console.log(plan[parseInt(e.target.id)].activity)
-    //need to find how many of the current names exist
-    // const sameElementsAlreadyPlanned = plan.filter((element) => element.activity === plan[parseInt(e.target.id)]);
+    console.log(typeof e.target.id); //e.target gives the minus icon element which has id
+    console.log(plan[parseInt(e.target.id)].activity);
     if (plan.length > 1) {
       setPlan((prevState) => {
         return [...prevState].filter(
