@@ -13,7 +13,7 @@ export class DisplayMapClass extends React.Component {
   componentDidMount() {
     const H = window.H;
     const platform = new H.service.Platform({
-      apikey: "PQXjrqipEq_9dEtEbGpmnSBXUOOhjS20oZb1DrTlSYE",
+      apikey: "PQXjrqipEq_9dEtEbGpmnSBXUOOhjS20oZb1DrTlSY",
     });
 
     const defaultLayers = platform.createDefaultLayers();
@@ -30,7 +30,6 @@ export class DisplayMapClass extends React.Component {
     );
     map.setZoom(11.35);
     this.setState({ map });
-    //this.state.map.setZoom(11.35);
   }
 
   componentDidUpdate() {
@@ -41,6 +40,15 @@ export class DisplayMapClass extends React.Component {
     this.props.plan.map((element, index) => {
       // console.log(element);
       if (element.activity.length > 1) {
+        console.log(element);
+        if (
+          this.state.map.getObjects().some((marker) => {
+            marker.b.lat === element.lat;
+          })
+        ) {
+          element.lat = element.lat + 0.1;
+        }
+
         const svgMarkup =
           '<svg width="24" height="24" ' +
           'xmlns="http://www.w3.org/2000/svg">' +
@@ -52,7 +60,8 @@ export class DisplayMapClass extends React.Component {
         const coords = { lat: element.lat, lng: element.long };
         const marker = new H.map.Marker(coords, { icon: icon });
         this.state.map.addObject(marker);
-        // this.state.map.setZoom(11.35);
+        console.log(this.state.map.getObjects()[0].b.lat);
+        console.log(this.state.map.getObjects()[0].b.lng);
       }
     });
   }
