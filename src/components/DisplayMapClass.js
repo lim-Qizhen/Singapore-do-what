@@ -38,17 +38,7 @@ export class DisplayMapClass extends React.Component {
     this.state.map.removeObjects(this.state.map.getObjects());
     console.log(this.props.plan);
     this.props.plan.map((element, index) => {
-      // console.log(element);
       if (element.activity.length > 1) {
-        console.log(element);
-        if (
-          this.state.map
-            .getObjects()
-            .some((marker) => marker.b.lng === element.long)
-        ) {
-          element.long += 0.01;
-        }
-
         const svgMarkup =
           '<svg width="24" height="24" ' +
           'xmlns="http://www.w3.org/2000/svg">' +
@@ -73,7 +63,6 @@ export class DisplayMapClass extends React.Component {
 
   render() {
     return (
-      // Set a height on the map so it will display
       <div
         ref={this.mapRef}
         style={{ margin: "0 auto", width: "809px", height: "500px" }}

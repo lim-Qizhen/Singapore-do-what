@@ -57,11 +57,13 @@ const Plan = (props) => {
         wishlistIndex = i;
       }
     }
-    
-    console.log(wishlistIndex)
-    console.log(props.wishlist[wishlistIndex])
+
     plan[e.target.id].lat = props.wishlist[wishlistIndex].lat;
-    plan[e.target.id].long = props.wishlist[wishlistIndex].long;
+    //need to find repeats in plan to right shift the marker on the map
+    const sameElementsAlreadyPlanned = plan.filter((element) => element.activity === e.target.value);
+    console.log(sameElementsAlreadyPlanned)
+    
+    plan[e.target.id].long = props.wishlist[wishlistIndex].long + (sameElementsAlreadyPlanned.length - 1)*0.01;
     setPlan([...plan]);
   };
   console.log(plan)
