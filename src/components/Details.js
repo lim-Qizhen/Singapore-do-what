@@ -62,9 +62,11 @@ const Details = (props) => {
   };
   /////determining if already in wishlist
   let wishlistIndex = -1;
-  props.wishlist.forEach((element, index) => {
-    element.name === resultToDisplay.name? wishlistIndex = index:wishlistIndex=-1;
-  });
+  for (let i = 0; i < props.wishlist.length; i++) {
+    if (props.wishlist[i].name === resultToDisplay.name) {
+      wishlistIndex = i;
+    }
+  }
   const inWishlist = wishlistIndex !== -1;
   /////setting Heart Colour
   let heartColour = "black";
@@ -73,7 +75,14 @@ const Details = (props) => {
   const handleClick = (e) => {
     if (!inWishlist) {
       props.onLike((prevState) => {
-        return [...prevState, {name: resultToDisplay.name, lat: resultToDisplay.location.latitude, long: resultToDisplay.location.longitude}];
+        return [
+          ...prevState,
+          {
+            name: resultToDisplay.name,
+            lat: resultToDisplay.location.latitude,
+            long: resultToDisplay.location.longitude,
+          },
+        ];
       });
     } else {
       props.onLike((prevState) => {

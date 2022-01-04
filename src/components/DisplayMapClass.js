@@ -36,9 +36,9 @@ export class DisplayMapClass extends React.Component {
     const H = window.H;
     //removes all previous ones in case of changes
     this.state.map.removeObjects(this.state.map.getObjects());
-    console.log(this.props.plan);
+    // console.log(this.props.plan);
     this.props.plan.map((element, index) => {
-      console.log(element.activity)
+      // console.log(element.activity)
       if (element.activity.length > 1) {
         const svgMarkup =
           '<svg width="24" height="24" ' +
@@ -51,8 +51,8 @@ export class DisplayMapClass extends React.Component {
         const coords = { lat: element.lat, lng: element.long };
         const marker = new H.map.Marker(coords, { icon: icon });
         this.state.map.addObject(marker);
-        console.log(this.state.map.getObjects()[0].b.lat);
-        console.log(this.state.map.getObjects()[0].b.lng);
+        // console.log(this.state.map.getObjects()[0].b.lat);
+        // console.log(this.state.map.getObjects()[0].b.lng);
       }
     });
   }
