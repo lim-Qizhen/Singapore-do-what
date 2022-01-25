@@ -1,5 +1,7 @@
 # Singapore-do-what
 
+Deployed site: https://singapore-do-what.netlify.app
+
 ### Objective
 When a common question is "Later where we go?" or "The other time, I found some recommendation online, but never mind, I lost it.", it becomes easy to assume that there is nowhere to go in Singapore. With the tourism site offering an API, I decided to compile a site which allows people to search for Singapore attractions and plan a simple one day itinerary.
 
