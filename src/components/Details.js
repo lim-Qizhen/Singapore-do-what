@@ -164,8 +164,6 @@ const Details = (props) => {
       {contactDisplay(phone, email)}
       {resultToDisplay.description}
       <Markup content={resultToDisplay.body} />
-      <h4>Location</h4>
-      <br />
       <h4>
         Reviews{" "}
         <span style={{ fontWeight: "lighter", color: "rgb(106,106,106)" }}>

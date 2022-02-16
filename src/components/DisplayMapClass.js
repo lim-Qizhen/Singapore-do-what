@@ -13,7 +13,7 @@ export class DisplayMapClass extends React.Component {
   componentDidMount() {
     const H = window.H;
     const platform = new H.service.Platform({
-      apikey: "PQXjrqipEq_9dEtEbGpmnSBXUOOhjS20oZb1DrTlSY",
+      apikey: "PQXjrqipEq_9dEtEbGpmnSBXUOOhjS20oZb1DrTlSYE",
     });
 
     const defaultLayers = platform.createDefaultLayers();
