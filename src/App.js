@@ -74,6 +74,7 @@ function App() {
           </Route>
           <Route path="/search/:name">
             <Details onLike={setWishlist} results={results} user={userInput} wishlist={wishlist}/>
+            <Details/>
           </Route>
           <Route path = "/plan">
             <Plan wishlist = {wishlist}></Plan>

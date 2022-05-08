@@ -50,7 +50,7 @@ const SearchResults = (props) => {
           <option value="asc">Ascending</option>
           <option value="desc">Descending</option>
         </select>
-        {displayArray.map((result) => {
+      {Z.map((result) => {
           return <SearchResult result={result} />;
         })}
       </div>
